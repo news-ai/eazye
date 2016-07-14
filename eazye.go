@@ -105,6 +105,12 @@ func GenerateSince(info MailboxInfo, since time.Time, markAsRead, delete bool) (
 	return generateMail(info, "", &since, markAsRead, delete)
 }
 
+// GenerateUnreadSince will find all emails that have an internal date after the given time and pass them along to the
+// responses channel.
+func GenerateUnreadSince(info MailboxInfo, since time.Time, markAsRead, delete bool) (chan Response, error) {
+	return generateMail(info, "UNSEEN", &since, markAsRead, delete)
+}
+
 // Email is a simplified email struct containing the basic pieces of an email. If you want more info,
 // it should all be available within the Message attribute.
 type Email struct {
